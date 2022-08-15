@@ -36,10 +36,12 @@ namespace DynamisAI.BehaviorTreeModule
             Status = Status.Invalid;
         }
 
-        public void Abort()
+        public virtual void Abort()
         {
-            OnExit(Status.Aborted);
-            Status = Status.Aborted;
+            Status = Status.Failure;
+            OnExit(Status.Failure);
+            // OnExit(Status.Aborted);
+            // Status = Status.Aborted;
         }
 
         public bool IsEnd()

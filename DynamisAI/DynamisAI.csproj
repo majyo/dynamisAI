@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="RuleModule" />
+      <Folder Include="PlanningModule" />
       <Folder Include="StateMachineModule" />
     </ItemGroup>
 

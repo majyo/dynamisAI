@@ -18,6 +18,12 @@ namespace DynamisAI.BehaviorTreeModule
             }
         }
 
+        public override void Abort()
+        {
+            base.Abort();
+            CurrentChild?.Abort();
+        }
+
         public void AddChild(Behavior behavior)
         {
             children.Add(behavior);

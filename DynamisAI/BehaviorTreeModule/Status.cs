@@ -6,6 +6,6 @@ namespace DynamisAI.BehaviorTreeModule
         Success,
         Failure,
         Running,
-        Aborted
+        // Aborted
     }
 }

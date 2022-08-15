@@ -9,6 +9,11 @@ namespace DynamisAI.BehaviorTreeModule
 
         public override Status Update()
         {
+            if (children.Count == 0)
+            {
+                return Status.Invalid;
+            }
+            
             while (CurrentChild != null)
             {
                 var status = CurrentChild.Tick();
@@ -19,11 +24,10 @@ namespace DynamisAI.BehaviorTreeModule
                         continue;
                     case Status.Success:
                     case Status.Running:
-                    case Status.Aborted:
-                        return status;
                     case Status.Invalid:
+                        return status;
                     default:
-                        throw new Exception("Tick children failed in sequence node.");
+                        return Status.Invalid;
                 }
             }
 
