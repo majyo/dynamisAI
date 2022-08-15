@@ -1,54 +1,63 @@
+using System.Runtime.InteropServices;
 using DynamisAI.BehaviorTreeModule;
+using DynamisAI.BehaviorTreeModule.DebugBehaviors;
 using NUnit.Framework;
 
 namespace DynamisAITest.BehaviorTreeModule;
 
 public class RepeatTest
 {
-    private Root? _root;
-    private Repeat? _repeat;
-    private Action? _action;
-    private string? _message;
     
     [SetUp]
     public void Setup()
     {
-        _root = new Root();
-        _repeat = new Repeat(3);
-        _action = new DebugAction(() =>
-        {
-            _message = "Hello";
-            return true;
-        });
-        _root.SetChild(_repeat);
-        _repeat.SetChild(_action);
+
     }
     
     [Test]
     public void Test1()
     {
-        if (_root == null || _repeat == null || _action == null)
-        {
-            return;
-        }
+        string? message = null;
         
-        var status = _root.Tick();
-        Assert.AreEqual(Status.Running, status);
-        Assert.AreEqual(Status.Running, _root.Status);
-        Assert.AreEqual(Status.Running, _repeat.Status);
-        Assert.AreEqual(Status.Success, _action.Status);
-
-        while (_root.Status == Status.Running)
+        var root = new Root();
+        var repeat = new Repeat(3);
+        var action = new DebugAction(() =>
         {
-            status = _root.Tick();
-            Assert.AreEqual(Status.Running, _root.Status);
-            Assert.AreEqual(Status.Running, _repeat.Status);
-            Assert.AreEqual(Status.Success, _action.Status);
+            message = "Hello";
+            return true;
+        });
+        root.SetChild(repeat);
+        repeat.SetChild(action);
+        
+        var status = root.Tick();
+        Assert.AreEqual(Status.Running, status);
+        Assert.AreEqual(Status.Running, root.Status);
+        Assert.AreEqual(Status.Running, repeat.Status);
+        Assert.AreEqual(Status.Success, action.Status);
+
+        while (root.Status == Status.Running)
+        {
+            status = root.Tick();
+            Assert.AreEqual(Status.Running, root.Status);
+            Assert.AreEqual(Status.Running, repeat.Status);
+            Assert.AreEqual(Status.Success, action.Status);
             
-            status = _root.Tick();
-            Assert.AreEqual(Status.Success, _root.Status);
-            Assert.AreEqual(Status.Success, _repeat.Status);
-            Assert.AreEqual(Status.Success, _action.Status);
+            status = root.Tick();
+            Assert.AreEqual(Status.Success, root.Status);
+            Assert.AreEqual(Status.Success, repeat.Status);
+            Assert.AreEqual(Status.Success, action.Status);
         }
+    }
+
+    [Test]
+    public void Test2()
+    {
+        var root = new Root();
+        root.Tick();
+        Assert.AreEqual(Status.Invalid, root.Status);
+
+        var repeat = new Repeat();
+        repeat.Tick();
+        Assert.AreEqual(Status.Invalid, repeat.Status);
     }
 }
