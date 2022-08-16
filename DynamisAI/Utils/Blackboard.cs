@@ -1,4 +1,4 @@
-namespace DynamisAI.BehaviorTreeModule;
+namespace DynamisAI.Utils;
 
 public class Blackboard
 {

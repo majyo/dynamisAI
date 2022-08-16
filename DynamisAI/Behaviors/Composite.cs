@@ -1,4 +1,4 @@
-namespace DynamisAI.BehaviorTreeModule
+namespace DynamisAI.Behaviors
 {
     public abstract class Composite : Behavior
     {

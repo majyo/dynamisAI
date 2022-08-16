@@ -1,4 +1,4 @@
-namespace DynamisAI.BehaviorTreeModule.DebugBehaviors;
+namespace DynamisAI.Behaviors.DebugBehaviors;
 
 public class DebugAction : Action
 {

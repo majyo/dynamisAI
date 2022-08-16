@@ -1,6 +1,6 @@
 ﻿using System;
-using DynamisAI.BehaviorTreeModule;
-using DynamisAI.BehaviorTreeModule.DebugBehaviors;
+using DynamisAI.Behaviors;
+using DynamisAI.Behaviors.DebugBehaviors;
 using NUnit.Framework;
 
 namespace DynamisAITest.BehaviorTreeModule;
@@ -30,19 +30,16 @@ public class SelectorTest
         selector.AddChild(action3);
         selector.AddChild(action4);
         
-
         selector.Tick();
         Assert.AreEqual(Status.Running, selector.Status);
         Assert.AreEqual(Status.Running, action1.Status);
         selector.Tick();
         Assert.AreEqual(Status.Running, selector.Status);
         Assert.AreEqual(Status.Failure, action1.Status);
-        Assert.AreEqual(Status.Running, selector.Status);
         Assert.AreEqual(Status.Running, action2.Status);
         selector.Tick();
         Assert.AreEqual(Status.Running, selector.Status);
         Assert.AreEqual(Status.Failure, action2.Status);
-        Assert.AreEqual(Status.Running, selector.Status);
         Assert.AreEqual(Status.Running, action3.Status);
         selector.Tick();
         Assert.AreEqual(Status.Success, selector.Status);

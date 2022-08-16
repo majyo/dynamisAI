@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
-using DynamisAI.BehaviorTreeModule;
-using DynamisAI.BehaviorTreeModule.DebugBehaviors;
+using DynamisAI.Behaviors;
+using DynamisAI.Behaviors.DebugBehaviors;
 using NUnit.Framework;
 
 namespace DynamisAITest.BehaviorTreeModule;

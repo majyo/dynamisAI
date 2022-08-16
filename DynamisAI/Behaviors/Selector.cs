@@ -1,6 +1,6 @@
-namespace DynamisAI.BehaviorTreeModule
+namespace DynamisAI.Behaviors
 {
-    public class Sequence : Composite
+    public class Selector : Composite
     {
         public override void OnEnter()
         {
@@ -19,11 +19,11 @@ namespace DynamisAI.BehaviorTreeModule
                 var status = CurrentChild.Tick();
                 switch (status)
                 {
-                    case Status.Success:
+                    case Status.Failure:
                         currentChildIndex += 1;
                         continue;
+                    case Status.Success:
                     case Status.Running:
-                    case Status.Failure:
                     case Status.Invalid:
                         return status;
                     default:
@@ -31,7 +31,7 @@ namespace DynamisAI.BehaviorTreeModule
                 }
             }
 
-            return Status.Success;
+            return Status.Failure;
         }
     }
 }

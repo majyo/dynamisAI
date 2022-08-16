@@ -6,9 +6,4 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="PlanningModule" />
-      <Folder Include="StateMachineModule" />
-    </ItemGroup>
-
 </Project>
