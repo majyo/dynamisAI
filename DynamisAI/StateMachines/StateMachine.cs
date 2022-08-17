@@ -11,6 +11,8 @@ public class StateMachine
     private State? _prevState;
     private State? _currState;
 
+    public Blackboard Blackboard => _blackboard;
+
     public StateMachine()
     {
         _states = new HashSet<State>();
