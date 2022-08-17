@@ -1,7 +1,12 @@
-namespace DynamisAI.StateMachins;
+using DynamisAI.Utils;
+
+namespace DynamisAI.StateMachines;
 
 public abstract class State
 {
+    public Blackboard? Blackboard { get; set; }
+    public string Name { get; set; } = "Default";
+
     public virtual void OnEnter()
     {
     }
